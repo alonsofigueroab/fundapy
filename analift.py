@@ -6,6 +6,8 @@ import sys
 from scipy.spatial import ConvexHull
 import matplotlib.colors as mcolors
 
+from scipy.ndimage import gaussian_filter
+
 def leer_desde_portapapeles(tipo_dato):
     """
     Solicita al usuario copiar datos y los lee del portapapeles.
@@ -129,8 +131,10 @@ def ejecutar_analisis_portapapeles():
     x_relativo = df_critico['X'].values - x_offset
     z_relativo = df_critico['Z'].values - z_offset
     
+    values = df_critico['Soil Pressure'].values
+    
     # Empaquetado de puntos trasladados
-    points_rel = np.column_stack((x_relativo, z_relativo))
+    points_rel = np.column_stack((z_relativo, x_relativo))
     
     # Definición de grilla basada en dimensiones
     ancho_x = x_relativo.max()
@@ -140,27 +144,38 @@ def ejecutar_analisis_portapapeles():
     grid_x, grid_z = np.mgrid[0:ancho_x:1000j, 0:alto_z:1000j]
     
     # Interpolación de puntos relativos
-    grid_p_crit = griddata(points_rel, values, (grid_x, grid_z), method='cubic')
+    grid_p_crit = griddata(points_rel, values, (grid_z, grid_x), method='cubic')
     
     # IMPORTANTE: La interpolación cúbica puede generar valores negativos falsos (-0.001) 
     # cerca del cero. Los limpiamos volviéndolos 0 o NaN para que no afecten el gráfico.
     grid_p_crit[grid_p_crit < 0] = 0 
     
+    # Relleno de NaNs exteriores con 0 para que el filtro no expanda bordes quebrados
+    grid_p_crit = np.nan_to_num(grid_p_crit, nan=0.0)
+    
+    # Filtro gaussiano para suavizar la transición entre zonas de presión (opcional, ajustar sigma según necesidad)
+    sigma_suavizado = 8
+    grid_p_crit = gaussian_filter(grid_p_crit, sigma=sigma_suavizado)
+    
+    # En caso de que el filtro haya agregado valores negativos, los corregimos nuevamente
+    grid_p_crit[grid_p_crit < 0] = 0
+        
     plt.figure(figsize=(12, 10))
     
     # Configuración de niveles
+    umbral_corte = 0.01
     v_max = np.nanmax(values)
-    niveles = np.linspace(0.01, v_max, 100)
+    niveles = np.linspace(umbral_corte, v_max, 100)
     
     # Graficamos el relleno (Solo compresiones positivas)
     # cmap='YlOrRd' (Amarillo a Rojo) o 'jet' / 'viridis'
-    contour_fill = plt.contourf(grid_x, grid_z, grid_p_crit, 
+    contour_fill = plt.contourf(grid_z, grid_x, grid_p_crit, 
                                 levels=niveles, 
                                 cmap='jet', 
                                 extend='max') 
     
     # Graficar frontera de levantamiento (Presión <= 0.01 ton/m²)
-    plt.contour(grid_x, grid_z, grid_p_crit, 
+    plt.contour(grid_z, grid_x, grid_p_crit, 
                 levels=[0.01], 
                 colors='black', 
                 linewidths=2, 
@@ -178,9 +193,9 @@ def ejecutar_analisis_portapapeles():
         pass
 
     # Títulos y Ajustes
-    plt.title(f"Distribución de Presiones Combinación LC{lc_critico}\nLevantamiento: {pct_critico:.2f}%, Compresión: {100 - pct_critico:.2f}%")
-    plt.xlabel("Coordenada X [m]")
-    plt.ylabel("Coordenada Z [m]")
+    plt.title(f"Distribución de Presiones Combinación LC{lc_critico}\nCompresión: {100 - pct_critico:.2f}%, Levantamiento: {pct_critico:.2f}%")
+    plt.xlabel("Coordenada Z [m]")
+    plt.ylabel("Coordenada X [m]")
     plt.axis('equal') 
     
     # Fondo gris muy claro para diferenciar el "blanco de levantamiento" del "fondo del plot"
