@@ -121,16 +121,26 @@ def ejecutar_analisis_portapapeles():
     
     print(f"\nGraficando combinación crítica: {lc_critico}")
     
-    points = df_critico[['X', 'Z']].values
-    values = df_critico['Soil Pressure'].values
+    # Calcular los offsets para ubicar la grilla correctamente en el origen del sistema de coordenadas.
+    x_offset = df_critico['X'].min()
+    z_offset = df_critico['Z'].min()
     
-    # --- MEJORA 1: Aumentar Resolución de Grilla ---
-    # Subimos a 1000x1000 para que las curvas sean muy suaves (HD)
-    grid_x, grid_z = np.mgrid[x_min:x_max:1000j, z_min:z_max:1000j]
+    # Generación de coordenadas relativas (Locales)
+    x_relativo = df_critico['X'].values - x_offset
+    z_relativo = df_critico['Z'].values - z_offset
     
-    # --- MEJORA 2: Interpolación Cúbica Controlada ---
-    # 'cubic' genera curvas suaves reales, eliminando el efecto "sierra" de 'linear'.
-    grid_p_crit = griddata(points, values, (grid_x, grid_z), method='cubic')
+    # Empaquetado de puntos trasladados
+    points_rel = np.column_stack((x_relativo, z_relativo))
+    
+    # Definición de grilla basada en dimensiones
+    ancho_x = x_relativo.max()
+    alto_z = z_relativo.max()
+    
+    # Recalcular límites para la grilla basada en coordenadas relativas
+    grid_x, grid_z = np.mgrid[0:ancho_x:1000j, 0:alto_z:1000j]
+    
+    # Interpolación de puntos relativos
+    grid_p_crit = griddata(points_rel, values, (grid_x, grid_z), method='cubic')
     
     # IMPORTANTE: La interpolación cúbica puede generar valores negativos falsos (-0.001) 
     # cerca del cero. Los limpiamos volviéndolos 0 o NaN para que no afecten el gráfico.
@@ -138,23 +148,18 @@ def ejecutar_analisis_portapapeles():
     
     plt.figure(figsize=(12, 10))
     
-    # --- ESTRATEGIA VISUAL: Definir niveles exactos ---
+    # Configuración de niveles
     v_max = np.nanmax(values)
-    
-    # Definimos niveles que parten estrictamente desde un epsilon positivo (ej. 0.01 ton/m2)
-    # Esto asegura que el "Blanco" sea todo lo que está entre 0 y 0.01
-    niveles = np.linspace(0.01, v_max, 100) 
+    niveles = np.linspace(0.01, v_max, 100)
     
     # Graficamos el relleno (Solo compresiones positivas)
     # cmap='YlOrRd' (Amarillo a Rojo) o 'jet' / 'viridis'
     contour_fill = plt.contourf(grid_x, grid_z, grid_p_crit, 
                                 levels=niveles, 
-                                cmap='YlOrRd', 
+                                cmap='jet', 
                                 extend='max') 
     
-    # --- DIBUJAR LA FRONTERA EXACTA (Línea de Levantamiento) ---
-    # Dibujamos una línea sólida exactamente en el mismo umbral donde empieza el color (0.01)
-    # Esto "cierra" visualmente el área blanca perfectamente.
+    # Graficar frontera de levantamiento (Presión <= 0.01 ton/m²)
     plt.contour(grid_x, grid_z, grid_p_crit, 
                 levels=[0.01], 
                 colors='black', 
@@ -164,11 +169,11 @@ def ejecutar_analisis_portapapeles():
     cbar = plt.colorbar(contour_fill)
     cbar.set_label('Presión de Suelo [ton/m²]')
 
-    # --- CONTORNO FÍSICO DE LA ZAPATA ---
+    # Contorno de la Zapata (Convex Hull de los puntos)
     try:
-        hull = ConvexHull(points)
+        hull = ConvexHull(points_rel)
         for simplex in hull.simplices:
-            plt.plot(points[simplex, 0], points[simplex, 1], 'k-', linewidth=3) # Borde más grueso
+            plt.plot(points_rel[simplex, 0], points_rel[simplex, 1], 'k-', linewidth=3) # Borde más grueso
     except:
         pass
 
