@@ -1,4 +1,5 @@
-import pandas as pd
+import polars as pl
+import re
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import griddata
@@ -18,7 +19,7 @@ def leer_desde_portapapeles(tipo_dato):
     
     try:
         # header=0 asume que la primera línea copiada son los encabezados
-        df = pd.read_clipboard(sep='\t') # RISA suele usar tabulaciones
+        df = pl.read_clipboard(separator='\t') # RISA suele usar tabulaciones
         print(f"    Lectura exitosa: {len(df)} filas detectadas.")
         return df
     except Exception as e:
@@ -27,7 +28,8 @@ def leer_desde_portapapeles(tipo_dato):
 
 def limpiar_columnas(df):
     """Normaliza nombres de columnas eliminando espacios y unidades entre corchetes."""
-    df.columns = df.columns.str.strip().str.replace(r"\[.*\]", "", regex=True).str.strip()
+    new_cols = {col: re.sub(r"\[.*\]", "", col).strip() for col in df.columns}
+    df = df.rename(new_cols)
     return df
 
 def ejecutar_analisis_portapapeles():
@@ -64,19 +66,19 @@ def ejecutar_analisis_portapapeles():
     print("\nProcesando datos...")
     
     # Convertir Labels a string para asegurar match perfecto
-    df_nodos['Label'] = df_nodos['Label'].astype(str)
-    df_presiones['Label'] = df_presiones['Label'].astype(str)
+    df_nodos = df_nodos.with_columns(pl.col('Label').cast(pl.String))
+    df_presiones = df_presiones.with_columns(pl.col('Label').cast(pl.String))
     
     # Merge: Unimos la geometría (X, Z) a los resultados de presión usando 'Label'
-    df_merged = pd.merge(df_presiones, df_nodos[['Label', 'X', 'Z']], on='Label', how='left')
+    df_merged = df_presiones.join(df_nodos.select(['Label', 'X', 'Z']), on='Label', how='left')
     
     # Verificar si hubo nodos sin coordenadas (mismatch)
-    if df_merged['X'].isnull().any():
+    if df_merged['X'].is_null().any():
         print("    Advertencia: Algunos nodos en la tabla de presión no se encontraron en la tabla de coordenadas.")
-        df_merged = df_merged.dropna(subset=['X', 'Z'])
+        df_merged = df_merged.drop_nulls(subset=['X', 'Z'])
 
     # 4. Análisis Iterativo por Combinación (LC)
-    combinaciones = df_merged['LC'].unique()
+    combinaciones = df_merged['LC'].unique().to_list()
     resultados = []
     
     # Definir límites de la zapata para la grilla
@@ -87,10 +89,10 @@ def ejecutar_analisis_portapapeles():
     grid_x, grid_z = np.mgrid[x_min:x_max:500j, z_min:z_max:500j]
     
     for lc in combinaciones:
-        subset = df_merged[df_merged['LC'] == lc]
+        subset = df_merged.filter(pl.col('LC') == lc)
         
-        points = subset[['X', 'Z']].values
-        values = subset['Soil Pressure'].values
+        points = subset.select(['X', 'Z']).to_numpy()
+        values = subset['Soil Pressure'].to_numpy()
         
         # Interpolación Lineal (conservadora y precisa para bordes)
         grid_p = griddata(points, values, (grid_x, grid_z), method='linear')
@@ -128,10 +130,10 @@ def ejecutar_analisis_portapapeles():
     z_offset = df_critico['Z'].min()
     
     # Generación de coordenadas relativas (Locales)
-    x_relativo = df_critico['X'].values - x_offset
-    z_relativo = df_critico['Z'].values - z_offset
+    x_relativo = df_critico['X'].to_numpy() - x_offset
+    z_relativo = df_critico['Z'].to_numpy() - z_offset
     
-    values = df_critico['Soil Pressure'].values
+    values = df_critico['Soil Pressure'].to_numpy()
     
     # Empaquetado de puntos trasladados
     points_rel = np.column_stack((z_relativo, x_relativo))
