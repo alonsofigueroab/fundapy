@@ -19,11 +19,27 @@ def leer_desde_portapapeles(tipo_dato):
     
     try:
         # header=0 asume que la primera línea copiada son los encabezados
-        df = pl.read_clipboard(separator='\t') # RISA suele usar tabulaciones
+        # Aumentamos infer_schema_length para evitar errores si hay datos mixtos o sucios
+        # quote_char=None evita que Polars confunda comillas (ej. pulgadas " o texto sucio) con bloques de texto
+        df = pl.read_clipboard(separator='\t', infer_schema_length=10000, quote_char=None) 
         print(f"    Lectura exitosa: {len(df)} filas detectadas.")
         return df
     except Exception as e:
-        print(f"    Error leyendo el portapapeles: {e}")
+        print(f"    Error leyendo el portapapeles con Polars: {e}")
+        
+        # Fallback: Intentar con Pandas si está instalado (útil si Polars falla con el formato)
+        try:
+            import pandas as pd
+            print("    -> Intentando fallback con Pandas...")
+            df_pd = pd.read_clipboard(sep='\t')
+            df = pl.from_pandas(df_pd)
+            print(f"    Lectura exitosa (vía Pandas): {len(df)} filas detectadas.")
+            return df
+        except ImportError:
+            print("    (Pandas no está instalado para usar como alternativa)")
+        except Exception as e2:
+            print(f"    Error en fallback con Pandas: {e2}")
+            
         return None
 
 def limpiar_columnas(df):
@@ -68,6 +84,16 @@ def ejecutar_analisis_portapapeles():
     # Convertir Labels a string para asegurar match perfecto
     df_nodos = df_nodos.with_columns(pl.col('Label').cast(pl.String))
     df_presiones = df_presiones.with_columns(pl.col('Label').cast(pl.String))
+
+    # Asegurar tipos numéricos (por si Polars leyó como String debido a basura en el portapapeles)
+    # strict=False convierte valores no numéricos a null en lugar de fallar
+    df_nodos = df_nodos.with_columns([
+        pl.col('X').cast(pl.Float64, strict=False),
+        pl.col('Z').cast(pl.Float64, strict=False)
+    ])
+    df_presiones = df_presiones.with_columns(
+        pl.col('Soil Pressure').cast(pl.Float64, strict=False)
+    )
     
     # Merge: Unimos la geometría (X, Z) a los resultados de presión usando 'Label'
     df_merged = df_presiones.join(df_nodos.select(['Label', 'X', 'Z']), on='Label', how='left')
