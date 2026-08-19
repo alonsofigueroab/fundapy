@@ -1,0 +1,61 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.8",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "b1df8980e32a147cba29f2c855590aa4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "KLnR",
+      "code_hash": "73acb490a2c0d970a209794faee1e638",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='KLnR-0' random-id='6868b019-a12f-63a7-e234-c941c6b2d132'><marimo-text-area data-initial-value='&quot;&quot;' data-label='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003ePegar datos de RISA&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-placeholder='&quot;&quot;' data-disabled='false' data-debounce='true' data-full-width='true' data-rows='10'></marimo-text-area></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "mTev",
+      "code_hash": "92e5a29ba191a4bd4869dff63680828d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='mTev-0' random-id='aca12822-6aa1-5055-3522-397fd168c2c8'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;LC&#92;&quot;:1,&#92;&quot;Slab&#92;&quot;:&#92;&quot;FP-F.1&#92;&quot;,&#92;&quot;Angle[deg]&#92;&quot;:0,&#92;&quot;Mo-xx[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-xx[mt-m]&#92;&quot;:6.815,&#92;&quot;Mo-zz[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-zz[mt-m]&#92;&quot;:6.538,&#92;&quot;Ms-xx/Mo-xx&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;Ms-zz/Mo-zz&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;FSVx&#92;&quot;:&#92;&quot;inf&#92;&quot;,&#92;&quot;FSVz&#92;&quot;:&#92;&quot;inf&#92;&quot;},{&#92;&quot;LC&#92;&quot;:1,&#92;&quot;Slab&#92;&quot;:&#92;&quot;FP-F.2&#92;&quot;,&#92;&quot;Angle[deg]&#92;&quot;:0,&#92;&quot;Mo-xx[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-xx[mt-m]&#92;&quot;:6.89,&#92;&quot;Mo-zz[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-zz[mt-m]&#92;&quot;:6.895,&#92;&quot;Ms-xx/Mo-xx&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;Ms-zz/Mo-zz&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;FSVx&#92;&quot;:&#92;&quot;inf&#92;&quot;,&#92;&quot;FSVz&#92;&quot;:&#92;&quot;inf&#92;&quot;},{&#92;&quot;LC&#92;&quot;:1,&#92;&quot;Slab&#92;&quot;:&#92;&quot;FP-F.3&#92;&quot;,&#92;&quot;Angle[deg]&#92;&quot;:0,&#92;&quot;Mo-xx[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-xx[mt-m]&#92;&quot;:6.437,&#92;&quot;Mo-zz[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-zz[mt-m]&#92;&quot;:6.551,&#92;&quot;Ms-xx/Mo-xx&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;Ms-zz/Mo-zz&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;FSVx&#92;&quot;:&#92;&quot;inf&#92;&quot;,&#92;&quot;FSVz&#92;&quot;:&#92;&quot;inf&#92;&quot;},{&#92;&quot;LC&#92;&quot;:1,&#92;&quot;Slab&#92;&quot;:&#92;&quot;FP-A.1&#92;&quot;,&#92;&quot;Angle[deg]&#92;&quot;:0,&#92;&quot;Mo-xx[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-xx[mt-m]&#92;&quot;:0.5,&#92;&quot;Mo-zz[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-zz[mt-m]&#92;&quot;:0.261,&#92;&quot;Ms-xx/Mo-xx&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;Ms-zz/Mo-zz&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;FSVx&#92;&quot;:&#92;&quot;inf&#92;&quot;,&#92;&quot;FSVz&#92;&quot;:&#92;&quot;inf&#92;&quot;},{&#92;&quot;LC&#92;&quot;:1,&#92;&quot;Slab&#92;&quot;:&#92;&quot;FP-A.2&#92;&quot;,&#92;&quot;Angle[deg]&#92;&quot;:0,&#92;&quot;Mo-xx[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-xx[mt-m]&#92;&quot;:0.501,&#92;&quot;Mo-zz[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-zz[mt-m]&#92;&quot;:0.261,&#92;&quot;Ms-xx/Mo-xx&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;Ms-zz/Mo-zz&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;FSVx&#92;&quot;:&#92;&quot;inf&#92;&quot;,&#92;&quot;FSVz&#92;&quot;:&#92;&quot;inf&#92;&quot;},{&#92;&quot;LC&#92;&quot;:2,&#92;&quot;Slab&#92;&quot;:&#92;&quot;FP-F.1&#92;&quot;,&#92;&quot;Angle[deg]&#92;&quot;:0,&#92;&quot;Mo-xx[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-xx[mt-m]&#92;&quot;:6.951,&#92;&quot;Mo-zz[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-zz[mt-m]&#92;&quot;:6.643,&#92;&quot;Ms-xx/Mo-xx&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;Ms-zz/Mo-zz&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;FSVx&#92;&quot;:&#92;&quot;inf&#92;&quot;,&#92;&quot;FSVz&#92;&quot;:&#92;&quot;inf&#92;&quot;},{&#92;&quot;LC&#92;&quot;:2,&#92;&quot;Slab&#92;&quot;:&#92;&quot;FP-F.2&#92;&quot;,&#92;&quot;Angle[deg]&#92;&quot;:0,&#92;&quot;Mo-xx[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-xx[mt-m]&#92;&quot;:7.065,&#92;&quot;Mo-zz[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-zz[mt-m]&#92;&quot;:7.072,&#92;&quot;Ms-xx/Mo-xx&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;Ms-zz/Mo-zz&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;FSVx&#92;&quot;:&#92;&quot;inf&#92;&quot;,&#92;&quot;FSVz&#92;&quot;:&#92;&quot;inf&#92;&quot;},{&#92;&quot;LC&#92;&quot;:2,&#92;&quot;Slab&#92;&quot;:&#92;&quot;FP-F.3&#92;&quot;,&#92;&quot;Angle[deg]&#92;&quot;:0,&#92;&quot;Mo-xx[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-xx[mt-m]&#92;&quot;:6.508,&#92;&quot;Mo-zz[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-zz[mt-m]&#92;&quot;:6.652,&#92;&quot;Ms-xx/Mo-xx&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;Ms-zz/Mo-zz&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;FSVx&#92;&quot;:&#92;&quot;inf&#92;&quot;,&#92;&quot;FSVz&#92;&quot;:&#92;&quot;inf&#92;&quot;},{&#92;&quot;LC&#92;&quot;:2,&#92;&quot;Slab&#92;&quot;:&#92;&quot;FP-A.1&#92;&quot;,&#92;&quot;Angle[deg]&#92;&quot;:0,&#92;&quot;Mo-xx[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-xx[mt-m]&#92;&quot;:0.5,&#92;&quot;Mo-zz[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-zz[mt-m]&#92;&quot;:0.261,&#92;&quot;Ms-xx/Mo-xx&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;Ms-zz/Mo-zz&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;FSVx&#92;&quot;:&#92;&quot;inf&#92;&quot;,&#92;&quot;FSVz&#92;&quot;:&#92;&quot;inf&#92;&quot;},{&#92;&quot;LC&#92;&quot;:2,&#92;&quot;Slab&#92;&quot;:&#92;&quot;FP-A.2&#92;&quot;,&#92;&quot;Angle[deg]&#92;&quot;:0,&#92;&quot;Mo-xx[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-xx[mt-m]&#92;&quot;:0.501,&#92;&quot;Mo-zz[mt-m]&#92;&quot;:0.0,&#92;&quot;Ms-zz[mt-m]&#92;&quot;:0.261,&#92;&quot;Ms-xx/Mo-xx&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;Ms-zz/Mo-zz&#92;&quot;:&#92;&quot;9.999+&#92;&quot;,&#92;&quot;FSVx&#92;&quot;:&#92;&quot;inf&#92;&quot;,&#92;&quot;FSVz&#92;&quot;:&#92;&quot;inf&#92;&quot;}]&quot;' data-total-rows='135' data-size-bytes='27252' data-total-columns='11' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;LC&quot;,[&quot;integer&quot;,&quot;int64&quot;]],[&quot;Slab&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Angle[deg]&quot;,[&quot;integer&quot;,&quot;int64&quot;]],[&quot;Mo-xx[mt-m]&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Ms-xx[mt-m]&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Mo-zz[mt-m]&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Ms-zz[mt-m]&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;Ms-xx/Mo-xx&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;Ms-zz/Mo-zz&quot;,[&quot;string&quot;,&quot;object&quot;]],[&quot;FSVx&quot;,[&quot;number&quot;,&quot;float64&quot;]],[&quot;FSVz&quot;,[&quot;number&quot;,&quot;float64&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "/home/affigueroab/proyectos/fundapy/.venv/lib/python3.10/site-packages/pandas/core/nanops.py:1016: RuntimeWarning: invalid value encountered in subtract\n  sqr = _ensure_numeric((avg - values) ** 2)\n/home/affigueroab/proyectos/fundapy/.venv/lib/python3.10/site-packages/numpy/_core/function_base.py:162: RuntimeWarning: invalid value encountered in multiply\n  y *= step\n\u001b[33m[W 260525 17:30:39 table:1178]\u001b(B\u001b[m Failed to get bin values for column FSVx: bins must increase monotonically.\n/home/affigueroab/proyectos/fundapy/.venv/lib/python3.10/site-packages/numpy/_core/function_base.py:162: RuntimeWarning: invalid value encountered in multiply\n  y *= step\n\u001b[33m[W 260525 17:30:39 table:1178]\u001b(B\u001b[m Failed to get bin values for column FSVz: bins must increase monotonically.\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "EBON",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    }
+  ]
+}

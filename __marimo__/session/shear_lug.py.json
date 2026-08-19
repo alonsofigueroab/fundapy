@@ -1,0 +1,100 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.8",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "0ee3436443a88da5f63667bef3b1464c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "ebdf9dacaf1e5e6906f5f1c0e4c5df5c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "RrDI",
+      "code_hash": "8494eae3681cb30e914efcf58396b0eb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "GILQ",
+      "code_hash": "90f9b4f76e95df5c2217b07d530b4f49",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Jyfw",
+      "code_hash": "ed2a4a8f05fec33ea5b355ac2acf7bfd",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "CoUo",
+      "code_hash": "b7771715b354f1eea4a8a7b48961f7e2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "199.696 kN"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "VFAG",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

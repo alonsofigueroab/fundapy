@@ -5,9 +5,13 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "forallpeople>=2.7.1",
+    "google-genai>=2.6.0",
+    "marimo>=0.23.8",
     "matplotlib>=3.10.8",
     "numpy>=2.2.6",
     "pandas>=2.3.3",
     "polars>=1.38.1",
+    "pydantic-ai-slim>=1.102.0",
     "scipy>=1.15.3",
 ]
